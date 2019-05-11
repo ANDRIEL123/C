@@ -1,0 +1,9 @@
+Instalar: sudo apt-get install freeglut3-dev
+
+Para executar o programa:
+
+gcc Programa.c -lglut -lGLU -lGL
+./a.out
+
+Obs: só roda em extensão .c
+
