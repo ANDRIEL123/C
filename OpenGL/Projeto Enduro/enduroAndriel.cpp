@@ -94,13 +94,24 @@ void Desenha(void)
 			glVertex2f(0.0, -27.0);
 
 		glEnd();
-		//DESENHO DO CARRO
+		//DESENHO O QUADRADO DO CARRO
 		glColor3f(0.0f, 0.0f, 1.0f);
 		glBegin(GL_QUADS);
 			glVertex2f(-8.0, -28.0);
 			glVertex2f(-8.0, -20.0);
 			glVertex2f(-13.0, -20.0);
 			glVertex2f(-13.0, -28.0);
+		glEnd();
+
+		//DESENHA PENEUS DO CARRO
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glPointSize(6);
+
+		glBegin(GL_POINTS);
+			glVertex2f(-7.5, -21.5);
+			glVertex2f(-13.5,-21.5);
+			glVertex2f(-7.5, -26.0);
+			glVertex2f(-13.5,-26.0);
 		glEnd();
 
 
