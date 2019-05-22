@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <GL/glut.h>
 
+//USAR PUSHMATRIX
+//TRANSLACAO
 
 void Desenha(void)
 {
