@@ -71,6 +71,7 @@ void Desenha(void)
 
 		glBegin(GL_POINTS);
 			glVertex2f(5.0,-5.0);
+			glVertex2f(-54.0f,54.0f);
 
 		glEnd();
 	// Executa os comandos OpenGL
