@@ -12,6 +12,7 @@ void Desenha(void)
 
 	// Especifica a cor preta - Voc� pode trocar de cor, use: RGB
 	glColor3f(0.0f, 0.0f, 0.0f);
+
 	glLineWidth(2);
 	glColor3f(0.4f, 0.4f, 0.4f);
 	glBegin(GL_QUADS);
@@ -31,7 +32,6 @@ void Desenha(void)
 
 	glColor3f(0.8f, 0.9f, 1.0f);
 
-		//MORRO DIREITO
     glBegin(GL_LINES);
 		glVertex2f(10.0,15.1);
         glVertex2f(30.0,15.1);
@@ -45,34 +45,13 @@ void Desenha(void)
         glVertex2f(23.0,16.3);
 	glEnd();
 
-	//MORRO ESQUERDO
-		glBegin(GL_LINES);
-			 	glVertex2f(-40.0,15.1);
+	glBegin(GL_LINES);
+		glVertex2f(-40.0,15.1);
         glVertex2f(-15.0,15.1);
-				glVertex2f(-39.0,15.4);
-				glVertex2f(-16.0,15.4);
-				glVertex2f(-38.0,15.7);
-				glVertex2f(-17.0,15.7);
-				glVertex2f(-22.0,16.0);
-				glVertex2f(-18.0,16.0);
-				glVertex2f(-37.0,16.0);
-				glVertex2f(-25.0,16.0);
-				glVertex2f(-36.0,16.3);
-				glVertex2f(-26.0,16.3);
-				glVertex2f(-35.0,16.6);
-				glVertex2f(-27.0,16.6);
-				glVertex2f(-34.0,16.9);
-				glVertex2f(-28.0,16.9);
-				glVertex2f(-33.0,17.2);
-				glVertex2f(-29.0,17.2);
-				glVertex2f(-32.0,17.2);
-				glVertex2f(-30.0,17.2);
-		glEnd();
 
-		glBegin(GL_POINTS);
-			glVertex2f(5.0,-5.0);
 
-		glEnd();
+	glEnd();
+
 	// Executa os comandos OpenGL
 	glFlush();
 }
