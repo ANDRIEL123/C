@@ -69,11 +69,43 @@ void Desenha(void)
 				glVertex2f(-30.0,17.2);
 		glEnd();
 
-		glBegin(GL_POINTS);
-			glVertex2f(5.0,-5.0);
-			glVertex2f(-54.0f,54.0f);
+		glLineWidth(3);
+		//PISTA
+		glBegin(GL_LINES);
+			glVertex2f(30.0,-25.0);
+			glVertex2f(0.0,15.0);
+			glVertex2f(-30.0,-25.0);
+			glVertex2f(0.0,15.0);
+		glEnd();
+
+		//Linha do meio da PISTA
+		//glVertex2f(largura, altura);
+		glColor3f(1.0f, 1.0f, 0.0f);
+		glBegin(GL_LINES);
+			glVertex2f(0.0, 10.0);
+			glVertex2f(0.0, 15.0);
+			glVertex2f(0.0, 5.0);
+			glVertex2f(0.0, 0.0);
+			glVertex2f(0.0, -5.0);
+			glVertex2f(0.0, -10.0);
+			glVertex2f(0.0, -15.0);
+			glVertex2f(0.0, -20.0);
+			glVertex2f(0.0, -25.0);
+			glVertex2f(0.0, -27.0);
 
 		glEnd();
+		//DESENHO DO CARRO
+		glColor3f(0.0f, 0.0f, 1.0f);
+		glBegin(GL_QUADS);
+			glVertex2f(-8.0, -28.0);
+			glVertex2f(-8.0, -20.0);
+			glVertex2f(-13.0, -20.0);
+			glVertex2f(-13.0, -28.0);
+		glEnd();
+
+
+
+
 	// Executa os comandos OpenGL
 	glFlush();
 }
