@@ -7,23 +7,23 @@ void Inicializa(void)
 	glClearColor(1,1,1,0);  //define a cor de fundo como branco e opaco
 }
 
-/* Esse método callback é chamado na primeira vez 
-que a janela aparece para o usuário, e também sempre 
-que for necessário repintar a tela*/
+/* Esse mï¿½todo callback ï¿½ chamado na primeira vez
+que a janela aparece para o usuï¿½rio, e tambï¿½m sempre
+que for necessï¿½rio repintar a tela*/
 void Desenha(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT); // limpa o buffer de cor com a cor setada no Inicializa
-	
-    
-	
+
+
+
 	glPushMatrix();
-	glColor3f(1,0,0); //define a cor vermelha. Os elementos pintados a partir dessa linha serão vermelhos
+	glColor3f(1,0,0); //define a cor vermelha. Os elementos pintados a partir dessa linha serï¿½o vermelhos
 	glTranslatef(-0.5,0,0);
     glutWireSphere(0.5,10,8);
     glPopMatrix();
-   
+
     glPushMatrix();
-	glColor3f(0,1,0); //define a cor verde. Os elementos pintados a partir dessa linha serão verdes
+	glColor3f(0,1,0); //define a cor verde. Os elementos pintados a partir dessa linha serï¿½o verdes
     glTranslatef(0.5,0,0);
     glutSolidSphere(0.5,20,8);
 	glPopMatrix();
@@ -31,14 +31,15 @@ void Desenha(void)
 	glFlush(); //manda renderizar o desenho
 }
 
-int main(void)
+int main(int argc, char** argv)
 {
+	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); //buffer simples
 	glutInitWindowSize(400,400); //define o tamanho da janela
-	glutInitWindowPosition(50, 50); // posiciona a janela, cuja origem é no canto superior esquerdo
-	glutCreateWindow("Primeiro Programa"); //cria uma janela com o título especificado
-	glutDisplayFunc(Desenha); //registra a função callback de redesenhenho
-	Inicializa(); //inicialização própria desse programa
-	glutMainLoop(); // entra no laço de processamento de eventos
+	glutInitWindowPosition(50, 50); // posiciona a janela, cuja origem ï¿½ no canto superior esquerdo
+	glutCreateWindow("Primeiro Programa"); //cria uma janela com o tï¿½tulo especificado
+	glutDisplayFunc(Desenha); //registra a funï¿½ï¿½o callback de redesenhenho
+	Inicializa(); //inicializaï¿½ï¿½o prï¿½pria desse programa
+	glutMainLoop(); // entra no laï¿½o de processamento de eventos
 	return 0;
 }

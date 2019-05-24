@@ -1,12 +1,20 @@
 #include <stdlib.h>
 #include <GL/glut.h>
+#include <stdio.h>
+#include <time.h>
 
 //USAR PUSHMATRIX
 //TRANSLACAO
 
+void Timer(int value) {
+   glutPostRedisplay(); //manda o m�todo Desenha ser executado novamente*/
+   glutTimerFunc(2, Timer, 0); // define que a fun��o Timer dever� ser executada novamente ap�s 1 segundo
+}
+
 void Desenha(void)
 {
 	GLint width;
+	int aux = 0;
 
 	// Limpa a janela de visualiza��o com a cor
 	// de fundo definida previamente
@@ -72,6 +80,20 @@ void Desenha(void)
 		glEnd();
 
 		glLineWidth(3);
+
+		glPushMatrix();
+		//glTranslatef(direita/esquerda,cima/baixo,)
+		srand(time(NULL));
+
+		aux = rand() % 3;
+
+		if (aux == 1) {
+			glRotatef(10,0,0,1);
+		} else if (aux == 2) {
+			glRotatef(-10,0,0,1);
+		} else {
+			glRotatef(0,0,0,1);
+		}
 		//PISTA
 		glBegin(GL_LINES);
 			glVertex2f(30.0,-25.0);
@@ -96,6 +118,7 @@ void Desenha(void)
 			glVertex2f(0.0, -27.0);
 
 		glEnd();
+		glPopMatrix();
 		//DESENHO O QUADRADO DO CARRO
 		glColor3f(0.0f, 0.0f, 1.0f);
 		glBegin(GL_QUADS);
@@ -115,8 +138,6 @@ void Desenha(void)
 			glVertex2f(-7.5, -26.0);
 			glVertex2f(-13.5,-26.0);
 		glEnd();
-
-
 
 
 	// Executa os comandos OpenGL
@@ -161,6 +182,7 @@ void Inicializa (void)
 // Programa Principal
 int main(int argc, char** argv)
 {
+
 	glutInit(&argc, argv);
 
 	// Define do modo de opera��o da GLUT
@@ -177,6 +199,7 @@ int main(int argc, char** argv)
 
 	// Registra a fun��o callback de redesenho da janela de visualiza��o
 	glutDisplayFunc(Desenha);
+	glutTimerFunc(1000, Timer, 0);
 
 	// Registra a fun��o callback de redimensionamento da janela de visualiza��o
 	glutReshapeFunc(AlteraTamanhoJanela);
