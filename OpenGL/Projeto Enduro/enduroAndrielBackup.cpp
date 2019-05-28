@@ -3,41 +3,12 @@
 #include <stdio.h>
 #include <time.h>
 
-GLint pistaX = 0;
-GLint pistaY = 0;
-GLint pistaX2 = 0;
-GLint pistaY2 = 0;
-GLint moverCarroX = 0;
-GLint moverCarroY = 0;
+//USAR PUSHMATRIX
+//TRANSLACAO
 
 void Timer(int value) {
    glutPostRedisplay(); //manda o m�todo Desenha ser executado novamente*/
    glutTimerFunc(2, Timer, 0); // define que a fun��o Timer dever� ser executada novamente ap�s 1 segundo
-}
-
-void DesenhaCarro(void) {
-  //DESENHO O QUADRADO DO CARRO
-  glColor3f(0.0f, 0.0f, 1.0f);
-  glBegin(GL_QUADS);
-    glVertex2f(moverCarroX-8.0, moverCarroY-28.0);
-    glVertex2f(moverCarroX-8.0, moverCarroY-20.0);
-    glVertex2f(moverCarroX-13.0,moverCarroY-20.0);
-    glVertex2f(moverCarroX-13.0,moverCarroY-28.0);
-  glEnd();
-
-  //DESENHA PENEUS DO CARRO
-  glColor3f(1.0f, 1.0f, 1.0f);
-  glPointSize(6);
-
-  glBegin(GL_POINTS);
-    glVertex2f(moverCarroX-7.5, moverCarroY-21.5);
-    glVertex2f(moverCarroX-13.5,moverCarroY-21.5);
-    glVertex2f(moverCarroX-7.5, moverCarroY-26.0);
-    glVertex2f(moverCarroX-13.5,moverCarroY-26.0);
-  glEnd();
-
-// Executa os comandos OpenGL
-glFlush();
 }
 
 void Desenha(void)
@@ -113,63 +84,32 @@ void Desenha(void)
 		glPushMatrix();
 		//glTranslatef(direita/esquerda,cima/baixo,)
 		//PISTA
-    srand(time(NULL));
-    aux = rand() % 3;
-    if (aux == 1) {
+		srand(time(NULL));
+		aux = rand() % 3;
+		if (aux == 1) {
 			glRotatef(10,0,0,1);
 			glBegin(GL_LINES);
 				glVertex2f(20.0,-50.0);
 				glVertex2f(20.0,12.0);
 				glVertex2f(-20.0,-50.0);
 				glVertex2f(-20.0,19.0);
-        if(moverCarroX < 0 ) moverCarroX += 2;
-        if(moverCarroY > 0 && moverCarroX > 25) moverCarroX -= 2;
-        if(moverCarroX > 30) moverCarroX -= 2;
 			glEnd();
-
-      glColor3f(0.2f, 0.3f, 0.3f);
-      glBegin(GL_QUADS);
-        glVertex2f(20.0,-50.0);
-        glVertex2f(20.0,12.0);
-        glVertex2f(-20.0,19.0);
-        glVertex2f(-20.0,-50.0);
-      glEnd();
-    }
-      else if (aux == 2) {
-        glRotatef(-10,0,0,1);
-        glColor3f(0.8f, 0.9f, 1.0f);
-			     glBegin(GL_LINES);
-				       glVertex2f(20.0,-50.0);
-				       glVertex2f(20.0,19.0);
-				       glVertex2f(-20.0,-50.0);
-				       glVertex2f(-20.0,12.0);
-			     glEnd();
-
-           glColor3f(0.2f, 0.3f, 0.3f);
-           glBegin(GL_QUADS);
-            glVertex2f(20.0,-50.0);
-            glVertex2f(20.0,19.0);
-            glVertex2f(-20.0,12.0);
-            glVertex2f(-20.0,-50.0);
-           glEnd();
-      } else {
-        glColor3f(0.8f, 0.9f, 1.0f);
-        glBegin(GL_LINES);
-          glVertex2f(20.0,-50.0);
-          glVertex2f(20.0,15.0);
-          glVertex2f(-20.0,-50.0);
-          glVertex2f(-20.0,15.0);
-        glEnd();
-
-        glColor3f(0.2f, 0.3f, 0.3f);
-        glBegin(GL_QUADS);
-        glVertex2f(20.0,-50.0);
-        glVertex2f(20.0,15.0);
-        glVertex2f(-20.0,15.0);
-        glVertex2f(-20.0,-50.0);
-        glEnd();
-      }
-
+		} else if (aux == 2) {
+			glRotatef(-10,0,0,1);
+			glBegin(GL_LINES);
+				glVertex2f(20.0,-50.0);
+				glVertex2f(20.0,19.0);
+				glVertex2f(-20.0,-50.0);
+				glVertex2f(-20.0,12.0);
+			glEnd();
+		} else {
+			glBegin(GL_LINES);
+				glVertex2f(20.0,-50.0);
+				glVertex2f(20.0,15.0);
+				glVertex2f(-20.0,-50.0);
+				glVertex2f(-20.0,15.0);
+			glEnd();
+		}
 
 		//Linha do meio da PISTA
 		//glVertex2f(largura, altura);
@@ -189,9 +129,28 @@ void Desenha(void)
 			glVertex2f(0.0, -40.0);
 
 		glEnd();
-
 		glPopMatrix();
-    DesenhaCarro();
+		//DESENHO O QUADRADO DO CARRO
+		glColor3f(0.0f, 0.0f, 1.0f);
+		glBegin(GL_QUADS);
+			glVertex2f(-8.0, -28.0);
+			glVertex2f(-8.0, -20.0);
+			glVertex2f(-13.0, -20.0);
+			glVertex2f(-13.0, -28.0);
+		glEnd();
+
+		//DESENHA PENEUS DO CARRO
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glPointSize(6);
+
+		glBegin(GL_POINTS);
+			glVertex2f(-7.5, -21.5);
+			glVertex2f(-13.5,-21.5);
+			glVertex2f(-7.5, -26.0);
+			glVertex2f(-13.5,-26.0);
+		glEnd();
+
+
 	// Executa os comandos OpenGL
 	glFlush();
 }
@@ -217,24 +176,11 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h)
 		gluOrtho2D (-40.0f*w/h, 40.0f*w/h, -40.0f, 40.0f);
 }
 
-void moverCarro(int key, int x, int y) {
-   //if(key == GLUT_KEY_UP)      { moverCarroY += 2; }
-   //if(key == GLUT_KEY_DOWN)    { moverCarroY -= 2; }
-   if(key == GLUT_KEY_LEFT)    { moverCarroX -= 2; }
-   if(key == GLUT_KEY_RIGHT)   { moverCarroX += 2; }
-
-   if(moverCarroY >= 35) moverCarroY = -10;
-   if(moverCarroY < -12) moverCarroY = -10;
-
-}
 // Fun��o callback chamada para gerenciar eventos de teclas
 void Teclado (unsigned char key, int x, int y)
 {
 	if (key == 27)
 		exit(0);
-
-
-
 }
 
 // Fun��o respons�vel por inicializar par�metros e vari�veis
@@ -260,7 +206,7 @@ int main(int argc, char** argv)
 	glutInitWindowSize(600,450);
 
 	// Cria a janela passando como argumento o t�tulo da mesma
-	glutCreateWindow("Endurinho");
+	glutCreateWindow("Desenho de Linhas");
 
 	// Registra a fun��o callback de redesenho da janela de visualiza��o
 	glutDisplayFunc(Desenha);
@@ -271,7 +217,6 @@ int main(int argc, char** argv)
 
 	// Registra a fun��o callback para tratamento das teclas ASCII
 	glutKeyboardFunc (Teclado);
-  glutSpecialFunc(moverCarro);
 
 	// Chama a fun��o respons�vel por fazer as inicializa��es
 	Inicializa();
