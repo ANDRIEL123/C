@@ -7,23 +7,47 @@ GLint moverCarroX = 0;
 GLint moverCarroY = 0;
 GLint moverCarroX2 = 0;
 GLint moverCarroY2 = 0;
+GLint moverBusX = 0;
+GLint moverBusY = 0;
+GLint moverPistaY = 0;
+GLint recebePosicaoCarroX = 0;
+GLint recebePosicaoCarroY = 0;
+GLint recebePosicaoCarroX2 = 0;
+GLint recebePosicaoCarroY2 = 0;
+GLint recebePosicaoBusX = 0;
+GLint recebePosicaoBusY = 0;
+
 
 void Timer(int value) {
    glutPostRedisplay(); //manda o m?todo Desenha ser executado novamente*/
    glutTimerFunc(2, Timer, 0); // define que a fun??o Timer dever? ser executada novamente ap?s 1 segundo
 }
 
-
+/*
+void Colisao() {
+	if(recebePosicaoCarroY == (recebePosicaoCarroY2 -16) && (recebePosicaoCarroX == recebePosicaoCarroX2
+    || recebePosicaoCarroX - 1 == recebePosicaoCarroX2 || recebePosicaoCarroX + 1 == recebePosicaoCarroX2 ||
+     recebePosicaoCarroX + 2 == recebePosicaoCarroX2)) {
+		moverCarroY = -1000;
+		exit(0);
+	}
+	printf("Carro Y: %d\n", recebePosicaoCarroY);
+	printf("Bus Y: %d\n", recebePosicaoBusY);
+	if(recebePosicaoCarroY == (recebePosicaoBusY - 23) && (recebePosicaoCarroX == recebePosicaoBusX)) {
+		moverCarroY = -1000;
+		exit(0);
+	}
+}
+*/
 void DesenhaCarro(void) {
   //DESENHO O QUADRADO DO CARRO
   glColor3f(0.0f, 0.0f, 1.0f);
   glBegin(GL_QUADS);
-    glVertex2f(moverCarroX-8.0, moverCarroY-36.0);
-    glVertex2f(moverCarroX-8.0, moverCarroY-28.0);
-    glVertex2f(moverCarroX-13.0,moverCarroY-28.0);
-    glVertex2f(moverCarroX-13.0,moverCarroY-36.0);
+    glVertex2f(recebePosicaoCarroX = moverCarroX-8.0, recebePosicaoCarroY = moverCarroY-36.0);
+    glVertex2f(recebePosicaoCarroX = moverCarroX-8.0, recebePosicaoCarroY = moverCarroY-28.0);
+    glVertex2f(recebePosicaoCarroX = moverCarroX-13.0,recebePosicaoCarroY = moverCarroY-28.0);
+    glVertex2f(recebePosicaoCarroX = moverCarroX-13.0,recebePosicaoCarroY = moverCarroY-36.0);
   glEnd();
-  
   //DESENHA VIDRO INFERIOR CARRO
   glColor3f(0.8f, 0.9f, 1.0f);
   glBegin(GL_QUADS);
@@ -32,10 +56,8 @@ void DesenhaCarro(void) {
     glVertex2f(moverCarroX-12.0,moverCarroY-34.0);
     glVertex2f(moverCarroX-12.0,moverCarroY-35.5);
   glEnd();
-	
-	
   //DESENHA PENEUS DO CARRO
-  glColor3f(1.0f, 1.0f, 1.0f);
+  glColor3f(0.0f, 0.0f, 0.0f);
   glPointSize(6);
 
   glBegin(GL_POINTS);
@@ -44,24 +66,21 @@ void DesenhaCarro(void) {
     glVertex2f(moverCarroX-7.5, moverCarroY-34.5);
     glVertex2f(moverCarroX-13.5,moverCarroY-34.5);
   glEnd();
-  
-  //Faróis
+
+  //Farï¿½is
   glColor3f(1.0f, 1.0f, 0.0f);
   glBegin(GL_POINTS);
         glVertex2f(moverCarroX-9.0, moverCarroY-28.75);
     	glVertex2f(moverCarroX-12.0,moverCarroY-28.75);
   glEnd();
-  
-  //SEGUNDO CARRO
-  //QUADRADO
+  //SEGUNDO CARRO QUADRO
   glColor3f(1.0f, 0.0f, 0.0f);
   glBegin(GL_QUADS);
-    glVertex2f(moverCarroX2-8.0, moverCarroY2+13.0);
-    glVertex2f(moverCarroX2-8.0, moverCarroY2+5.0);
-    glVertex2f(moverCarroX2-13.0,moverCarroY2+5.0);
-    glVertex2f(moverCarroX2-13.0,moverCarroY2+13.0);
+    glVertex2f(recebePosicaoCarroX2 = moverCarroX2-8.0, recebePosicaoCarroY2 = moverCarroY2+13.0);
+    glVertex2f(recebePosicaoCarroX2 = moverCarroX2-8.0, recebePosicaoCarroY2 = moverCarroY2+5.0);
+    glVertex2f(recebePosicaoCarroX2 = moverCarroX2-13.0,recebePosicaoCarroY2 = moverCarroY2+5.0);
+    glVertex2f(recebePosicaoCarroX2 = moverCarroX2-13.0,recebePosicaoCarroY2 = moverCarroY2+13.0);
   glEnd();
-  
   //DESENHA VIDRO INFERIOR CARRO
   glColor3f(0.8f, 0.9f, 1.0f);
   glBegin(GL_QUADS);
@@ -70,39 +89,61 @@ void DesenhaCarro(void) {
     glVertex2f(moverCarroX2-12.0,moverCarroY2+12.5);
     glVertex2f(moverCarroX2-12.0,moverCarroY2+11.5);
   glEnd();
-	
-	
   //DESENHA PENEUS DO CARRO
-  glColor3f(1.0f, 1.0f, 1.0f);
+  glColor3f(0.0f, 0.0f, 0.0f);
   glPointSize(6);
-
   glBegin(GL_POINTS);
     glVertex2f(moverCarroX2-7.5, moverCarroY2+10.5);
     glVertex2f(moverCarroX2-13.5,moverCarroY2+10.5);
     glVertex2f(moverCarroX2-7.5, moverCarroY2+7.0);
     glVertex2f(moverCarroX2-13.5,moverCarroY2+7.0);
   glEnd();
-  
   glColor3f(1.0f, 1.0f, 0.0f);
   glBegin(GL_POINTS);
         glVertex2f(moverCarroX2-9.0, moverCarroY2+5.5);
     	glVertex2f(moverCarroX2-12.0,moverCarroY2+5.5);
   glEnd();
-
 // Executa os comandos OpenGL
 glFlush();
 }
 
-void Desenha(void)
-{
+void bus() {
+	glColor3f(1.0f, 1.0f, 0.0f);
+	glBegin(GL_QUADS);
+    	glVertex2f(recebePosicaoBusX = moverBusX+7.0, recebePosicaoBusY = moverBusY+0.0);
+    	glVertex2f(recebePosicaoBusX = moverBusX+7.0, recebePosicaoBusY = moverBusY+14.5);
+    	glVertex2f(recebePosicaoBusX = moverBusX+14.0,recebePosicaoBusY = moverBusY+14.5);
+    	glVertex2f(recebePosicaoBusX = moverBusX+14.0,recebePosicaoBusY = moverBusY+0.0);
+  	glEnd();
+  	glLineWidth(6);
+  	glColor3f(0.0f, 0.0f, 0.0f);
+  	glBegin(GL_LINES);
+  		glVertex2f(moverBusX+7.0, moverBusY+2.0);
+    	glVertex2f(moverBusX+7.0, moverBusY+4.5);
+    	glVertex2f(moverBusX+14.0,moverBusY+2.0);
+    	glVertex2f(moverBusX+14.0,moverBusY+4.5);
+    	glVertex2f(moverBusX+7.0, moverBusY+12.5);
+    	glVertex2f(moverBusX+7.0, moverBusY+10.0);
+    	glVertex2f(moverBusX+14.0,moverBusY+12.5);
+    	glVertex2f(+14.0,moverBusY+10.0);
+  	glEnd();
+    //VIDRO BUS
+    glColor3f(0.5f,1.0f,0.9f);
+    glBegin(GL_QUADS);
+      glVertex2f(moverBusX+8.0, moverBusY+0.0);
+      glVertex2f(moverBusX+8.0, moverBusY+2.0);
+      glVertex2f(moverBusX+13.0,moverBusY+2.0);
+      glVertex2f(moverBusX+13.0,moverBusY+0.0);
+    glEnd();
+
+glFlush();
+}
+
+void Desenha(void) {
 	GLint width;
 	int aux = 0;
-
-	// Limpa a janela de visualiza??o com a cor
-	// de fundo definida previamente
+	// Limpa a janela de visualiza??o com a cor de fundo definida previamente
 	glClear(GL_COLOR_BUFFER_BIT);
-	
-	// Especifica a cor preta - Voc? pode trocar de cor, use: RGB
 	glColor3f(0.0f, 0.0f, 0.0f);
 	glLineWidth(2);
 	glColor3f(0.4f, 0.4f, 0.4f);
@@ -122,7 +163,6 @@ void Desenha(void)
 	glEnd();
 
 	glColor3f(0.8f, 0.9f, 1.0f);
-
 		//MORRO DIREITO
     glBegin(GL_LINES);
 		glVertex2f(10.0,15.1);
@@ -136,7 +176,6 @@ void Desenha(void)
         glVertex2f(19.0,16.3);
         glVertex2f(23.0,16.3);
 	glEnd();
-
 	//MORRO ESQUERDO
 		glBegin(GL_LINES);
 			 	glVertex2f(-40.0,15.1);
@@ -164,7 +203,7 @@ void Desenha(void)
 		glLineWidth(3);
 
 		glPushMatrix();
-		//glTranslatef(direita/esquerda,cima/baixo,)
+
 		//PISTA
     	srand(time(NULL));
     	aux = rand() % 3;
@@ -222,48 +261,40 @@ void Desenha(void)
         glVertex2f(-20.0,-50.0);
         glEnd();
       }
-
 		//Linha do meio da PISTA
 		//glVertex2f(largura, altura);
 		glColor3f(1.0f, 1.0f, 0.0f);
 		glBegin(GL_LINES);
-			glVertex2f(0.0, 10.0);
-			glVertex2f(0.0, 15.0);
-			glVertex2f(0.0, 5.0);
-			glVertex2f(0.0, 0.0);
-			glVertex2f(0.0, -5.0);
-			glVertex2f(0.0, -10.0);
-			glVertex2f(0.0, -15.0);
-			glVertex2f(0.0, -20.0);
-			glVertex2f(0.0, -25.0);
-			glVertex2f(0.0, -30.0);
-			glVertex2f(0.0, -35.0);
-			glVertex2f(0.0, -40.0);
-
+			glVertex2f(0.0, moverPistaY+10.0);
+			glVertex2f(0.0, moverPistaY+15.0);
+			glVertex2f(0.0, moverPistaY+5.0);
+			glVertex2f(0.0, moverPistaY+0.0);
+			glVertex2f(0.0, moverPistaY-5.0);
+			glVertex2f(0.0, moverPistaY-10.0);
+			glVertex2f(0.0, moverPistaY-15.0);
+			glVertex2f(0.0, moverPistaY-20.0);
+			glVertex2f(0.0, moverPistaY-25.0);
+			glVertex2f(0.0, moverPistaY-30.0);
+			glVertex2f(0.0, moverPistaY-35.0);
+			glVertex2f(0.0, moverPistaY-40.0);
 		glEnd();
-		
+		bus();
 		DesenhaCarro();
-		glutTimerFunc(2, Timer, 0);
+		//Colisao();
 		glPopMatrix();
 	// Executa os comandos OpenGL
-	
-	glFlush();
-	
-}
 
+	glFlush();
+}
 // Fun??o callback chamada quando o tamanho da janela ? alterado
-void AlteraTamanhoJanela(GLsizei w, GLsizei h)
-{
+void AlteraTamanhoJanela(GLsizei w, GLsizei h){
 	// Evita a divisao por zero
 	if(h == 0) h = 1;
-
 	// Especifica as dimens?es da Viewport
 	glViewport(0, 0, w, h);
-
 	// Inicializa o sistema de coordenadas
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-
 	// Estabelece a janela de sele??o (esquerda, direita, inferior,
 	// superior) mantendo a propor??o com a janela de visualiza??o
 	if (w <= h)
@@ -281,69 +312,62 @@ void moverCarro(int key, int x, int y) {
 
    if(moverCarroY >= 35) moverCarroY = -10;
    if(moverCarroY < -10) moverCarroY = -10;
-   if(moverCarroX > 22) moverCarroX -= 2;	
+   if(moverCarroX > 22) moverCarroX -= 2;
    if(moverCarroX < -5) moverCarroX += 2;
-
 }
 
 void moverCarro2(int passo) {
-        moverCarroY2 -= 1;
-        if(moverCarroY2 < -40) {
-        moverCarroY2 = 10;
-        }
-        glutPostRedisplay();
-        glutTimerFunc(40, moverCarro2, 40);
+    moverCarroY2 -= 1;
+    if(moverCarroY2 < -55) {
+    	moverCarroY2 = 5;
+    }
+    glutPostRedisplay();
+    glutTimerFunc(100, moverCarro2, 350);
 }
 
+void moverLinhaDoMeio(int passo) {
+	moverPistaY -= 1;
+    if(moverPistaY < -10) {
+    	moverPistaY = 0;
+    }
+    glutPostRedisplay();
+    glutTimerFunc(50, moverLinhaDoMeio, 150);
+
+}
+
+void movimentaCaminhao(int passo) {
+	moverBusY -= 1;
+	if(moverBusY < - 60) {
+		moverBusY = 5;
+		recebePosicaoBusY = -1;
+	}
+	glutPostRedisplay();
+	glutTimerFunc(300, movimentaCaminhao, 900);
+}
 // Fun??o callback chamada para gerenciar eventos de teclas
-void Teclado (unsigned char key, int x, int y)
-{
+void Teclado (unsigned char key, int x, int y){
 	if (key == 27)
 		exit(0);
 }
-
 // Fun??o respons?vel por inicializar par?metros e vari?veis
-void Inicializa (void)
-{
-	// Define a cor de fundo da janela de visualiza??o como branca
+void Inicializa (void){
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
-// Programa Principal
-int main(int argc, char** argv)
-{
-
+int main(int argc, char** argv) {
 	glutInit(&argc, argv);
-
-	// Define do modo de opera??o da GLUT
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-
-	// Especifica a posi??o inicial da janela GLUT
 	glutInitWindowPosition(5,5);
-
-	// Especifica o tamanho inicial em pixels da janela GLUT
 	glutInitWindowSize(600,450);
-
-	// Cria a janela passando como argumento o t?tulo da mesma
 	glutCreateWindow("Endurinho");
-
-	// Registra a fun??o callback de redesenho da janela de visualiza??o
-	glutDisplayFunc(Desenha);
-	glutTimerFunc(1000, Timer, 0);
-	glutTimerFunc(10, moverCarro2, 10);
-	// Registra a fun??o callback de redimensionamento da janela de visualiza??o
-	glutReshapeFunc(AlteraTamanhoJanela);
-
-	// Registra a fun??o callback para tratamento das teclas ASCII
 	glutKeyboardFunc (Teclado);
-  	glutSpecialFunc(moverCarro);
-  	glutTimerFunc(1000, Timer, 0);;
-
-	// Chama a fun??o respons?vel por fazer as inicializa??es
 	Inicializa();
-
-	// Inicia o processamento e aguarda intera??es do usu?rio
+	glutDisplayFunc(Desenha);
+	glutReshapeFunc(AlteraTamanhoJanela);
+	glutSpecialFunc(moverCarro);
+	glutTimerFunc(10, movimentaCaminhao, 1);
+	glutTimerFunc(10, moverCarro2, 1);
+	glutTimerFunc(10, moverLinhaDoMeio, 1);
 	glutMainLoop();
-
 	return 0;
 }

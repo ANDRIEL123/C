@@ -6,7 +6,7 @@ void mostraNumeros(valor) {
 
 	while (i <= valor)
 		printf("%d\t", i++);
-	printf("\n");	
+	printf("\n");
 }
 
 int mostraNumerosR(valor) {
