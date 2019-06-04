@@ -14,6 +14,12 @@ int somaR(int *v, int n) {
     return 0;
 }
 
+int contarR(Celula *l) {
+  if(l) {
+    return 1 + contarR(l->prox);
+  }
+}
+
 int maiorR(int *v, int n) {
     if (n > 1){
         int vemDeCima = maiorR(v, n-1);
@@ -69,14 +75,19 @@ int main() {
     Celula *lista = NULL;
 
     int vetor[] = {12, 1, 5};
+
     printf("A soma dos elementos do vetor eh %d\n", somaR(vetor,3));
     printf("O maior elemento do vetor eh %d\n", maiorR(vetor,3));
 
     lista = inserirR(10,lista);
     lista = inserirR(12,lista);
     lista = inserirR(3,lista);
-
+    int conta = contarR(lista);
+    printf("Encontra-se no endereco %p\n", localizaR(1, vetor));
+    printf("Qtd elementos: %d\n", conta);
     exibirR(lista);
+
+
 
     return 0;
 }
