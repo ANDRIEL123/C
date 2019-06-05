@@ -13,7 +13,18 @@ int somaR(int *v, int n) {
     }
     return 0;
 }
+    return 0;
+}
 
+int contarR(Celula *l) {
+  if(l) {
+    return 1 + contarR(l->prox);
+  }
+}
+
+int maiorR(int *v, int n) {
+    if (n > 1){
+        int vemDeCima = maiorR(v, n-1);
 int contarR(Celula *l) {
   if(l) {
     return 1 + contarR(l->prox);
@@ -28,6 +39,10 @@ int maiorR(int *v, int n) {
     }
     return v[n-1];
 
+}
+
+Celular *destruirR(Celula *l) {
+  
 }
 
 int contaCelulasR(Celula *l) {
