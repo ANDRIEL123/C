@@ -130,15 +130,18 @@ void Colisao() {
 			moverBusY = 5;
 			moverCarroY = 0;
 			moverCarroX = 0;
+      manipulaY = -29;
 
 			}
 	//COLISAO DO BUS
 		if(manipulaY == moverBusY && (moverCarroX == moverBusX + 20 || moverCarroX == moverBusX + 22 || moverCarroX == moverBusX + 24
 			|| moverCarroX == moverBusX + 18 || moverCarroX == moverBusX + 16)){
 
-		moverCarroY2 = 5;
-		moverBusY = 5;
-		moverCarroX = 0;
+        moverCarroY2 = 5;
+        moverBusY = 5;
+        moverCarroY = 0;
+        moverCarroX = 0;
+        manipulaY = -29;
 		}
 	}
 }
@@ -305,10 +308,11 @@ void moverCarro(int key, int x, int y) {
    if(key == GLUT_KEY_LEFT)    { moverCarroX -= 2; }
    if(key == GLUT_KEY_RIGHT)   { moverCarroX += 2; }
 
-   if(moverCarroY >= 35) moverCarroY = -10;
-   if(moverCarroY < -10) moverCarroY = -10;
+   if(moverCarroY >= 35) manipulaY = -29, moverCarroY = 0;
+   //if(moverCarroY < -10) moverCarroY = -10;
    if(moverCarroX > 22) moverCarroX -= 2;
    if(moverCarroX < -5) moverCarroX += 2;
+
 }
 
 void moverCarro2(int passo) {
@@ -322,6 +326,9 @@ void moverCarro2(int passo) {
     if(moverCarroX == 0) {
     	moverCarroX2 = 0;
     }
+
+
+
     glutPostRedisplay();
     glutTimerFunc(100, moverCarro2, 350);
 }
