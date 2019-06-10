@@ -13,8 +13,6 @@ int somaR(int *v, int n) {
     }
     return 0;
 }
-    return 0;
-}
 
 int contarR(Celula *l) {
   if(l) {
@@ -22,27 +20,26 @@ int contarR(Celula *l) {
   }
 }
 
-int maiorR(int *v, int n) {
-    if (n > 1){
-        int vemDeCima = maiorR(v, n-1);
-int contarR(Celula *l) {
-  if(l) {
-    return 1 + contarR(l->prox);
+
+Celula *destruirR(Celula *l) {
+  if (l) {
+    l->prox = destruirR(l->prox);
+    free(l);
   }
+  return NULL;
 }
 
-int maiorR(int *v, int n) {
-    if (n > 1){
-        int vemDeCima = maiorR(v, n-1);
-        if (vemDeCima > v[n-1]) return vemDeCima;
-        return v[n-1];
+Celula *remover(int valor, Celula *l) {
+  if(l) {
+    if(valor == l->dado) {
+      Celula *tmp = l->prox;
+      free(l);
+      return tmp;
     }
-    return v[n-1];
-
-}
-
-Celular *destruirR(Celula *l) {
-  
+    l->prox = remover(valor, l->prox);
+    return l;
+  }
+  return NULL;
 }
 
 int contaCelulasR(Celula *l) {
@@ -62,9 +59,10 @@ int somaCelulasR(Celula *l) {
 int localizaR(int valor, Celula *l) {
     if (l) {
         if (valor == l->dado) return 1;
-        /*else*/ return localizaR(valor, l->prox);
+        l->dado = localizaR(valor, l->prox);
+        return l;
     }
-    return 0;
+    return NULL;
 }
 
 Celula *inserirR(int valor, Celula *l) {
@@ -83,7 +81,9 @@ void exibirR(Celula *l) {
     if (l){
         printf("%d\t", l->dado);
         exibirR(l->prox);
+        printf("\n");
     }
+
 }
 
 int main() {
@@ -92,19 +92,16 @@ int main() {
     int vetor[] = {12, 1, 5};
 
     printf("A soma dos elementos do vetor eh %d\n", somaR(vetor,3));
-    printf("O maior elemento do vetor eh %d\n", maiorR(vetor,3));
-
-    lista = inserirR(10,lista);
-    lista = inserirR(12,lista);
-    lista = inserirR(3,lista);
+    lista = inserirR(5,lista);
+    lista = inserirR(8,lista);
+    lista = inserirR(7,lista);
     int conta = contarR(lista);
-    printf("Encontra-se no endereco %p\n", localizaR(1, vetor));
     printf("Qtd elementos: %d\n", conta);
     exibirR(lista);
+    //lista = destruirR(lista);
+    lista = remover(8,lista);
 
-
-
-    return 0;
+    exibirR(lista);
 }
 
 /*
